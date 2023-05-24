@@ -4,7 +4,7 @@ import { ILogin } from "../models/IAuth";
 const authLogin = async (model: ILogin): Promise<boolean> => {
   try {
     const { data } = await axios.post(
-      "http://localhost:8000/api/auth/login/",
+      "http://localhost:8000/api/auth/login/", // TODO - change this with a non-hardcoded value
       model
     );
 

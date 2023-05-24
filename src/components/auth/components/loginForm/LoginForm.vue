@@ -17,11 +17,11 @@
     const response = await authLogin(authModel.value);
 
     if (response) {
-      router.push("/");
+      router.push("/"); // TODO - Change this to a non-hardcoded value
     }
   };
 </script>
-
+<!-- TODO - Add rules and validation to the form -->
 <template>
   <div class="flex h-screen justify-center">
     <VCard class="m-auto px-6 py-8 w-64">
