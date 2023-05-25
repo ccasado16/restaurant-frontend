@@ -1,22 +1,21 @@
 <script lang="ts" setup>
   import { ref } from "vue";
   import { ILogin } from "../../models/IAuth";
-  import { VForm } from "vuetify/components";
   import { useRouter } from "vue-router";
   import authLogin from "../../actions/authLogin";
   import loginRules from "./loginRules";
-  import { ElMessage } from "element-plus";
+  import { ElForm, ElMessage } from "element-plus";
 
   const authModel = ref({
     username: "",
     password: "",
   } as ILogin);
 
-  const formRef = ref<InstanceType<typeof VForm> | null>(null);
+  const formRef = ref<InstanceType<typeof ElForm> | null>(null);
   const loading = ref<boolean>(false);
   const router = useRouter();
 
-  const login = async () => {
+  const login = async (): Promise<void> => {
     const isValidForm = await formRef.value?.validate();
 
     if (!isValidForm) {
@@ -56,7 +55,7 @@
           v-model="authModel.password"
           type="password"
           show-password
-          placeholder="Username"
+          placeholder="Password"
           @keyup.enter="login"
         />
       </el-form-item>
