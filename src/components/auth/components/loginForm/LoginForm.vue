@@ -12,7 +12,7 @@
   } as ILogin);
 
   const formRef = ref<InstanceType<typeof VForm> | null>(null);
-    const loading = ref<boolean>(false);
+  const loading = ref<boolean>(false);
   const router = useRouter();
 
   const login = async () => {
