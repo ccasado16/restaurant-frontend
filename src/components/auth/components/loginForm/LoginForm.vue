@@ -30,25 +30,25 @@
 <!-- TODO - Add rules and validation to the form -->
 <template>
   <div class="flex h-screen justify-center">
-    <VCard class="m-auto px-6 py-8 w-64">
-      <VForm ref="formRef" :model="authModel">
-        <VTextField
+    <v-card class="m-auto px-6 py-8 w-64">
+      <v-form ref="formRef" :model="authModel">
+        <v-text-field
           class="mb-2"
           label="Username"
           v-model="authModel.username"
           :rules="loginRules.username"
-        ></VTextField>
+        ></v-text-field>
 
-        <VTextField
+        <v-text-field
           label="Password"
           v-model="authModel.password"
           :rules="loginRules.password"
           placeholder="Enter your password"
           type="password"
           @keydown.enter="login"
-        ></VTextField>
+        ></v-text-field>
 
-        <VBtn
+        <v-btn
           block
           color="success"
           size="large"
@@ -56,8 +56,8 @@
           @click="login"
         >
           Sign In
-        </VBtn>
-      </VForm>
-    </VCard>
+        </v-btn>
+      </v-form>
+    </v-card>
   </div>
 </template>
