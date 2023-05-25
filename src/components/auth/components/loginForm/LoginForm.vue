@@ -27,7 +27,7 @@
     if (response) router.push("/"); // TODO - Change this to a non-hardcoded value
   };
 </script>
-<!-- TODO - Add rules and validation to the form -->
+
 <template>
   <div class="flex h-screen justify-center">
     <v-card class="m-auto px-6 py-8 w-64">
