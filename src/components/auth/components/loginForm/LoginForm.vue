@@ -12,6 +12,7 @@
   } as ILogin);
 
   const formRef = ref<InstanceType<typeof VForm> | null>(null);
+    const loading = ref<boolean>(false);
   const router = useRouter();
 
   const login = async () => {
@@ -22,9 +23,11 @@
     }
 
     console.log("Form is valid");
+    loading.value = true;
     // login action
     const response = await authLogin(authModel.value);
     if (response) router.push("/"); // TODO - Change this to a non-hardcoded value
+    loading.value = false;
   };
 </script>
 
@@ -54,6 +57,7 @@
           size="large"
           variant="elevated"
           @click="login"
+          :loading="loading"
         >
           Sign In
         </v-btn>
