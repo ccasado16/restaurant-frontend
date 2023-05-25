@@ -5,6 +5,7 @@
   import { useRouter } from "vue-router";
   import authLogin from "../../actions/authLogin";
   import loginRules from "./loginRules";
+  import { ElMessage } from "element-plus";
 
   const authModel = ref({
     username: "",
@@ -34,32 +35,41 @@
     }
 
     loading.value = false;
-    window.alert("Wrong credentials"); // TODO - Try to find an alternative
-    
+    ElMessage.error("Wrong credentials");
   };
 </script>
 
 <template>
   <div class="flex h-screen justify-center">
-    <el-form class="m-auto" ref="formRef" :model="authModel" :rules="loginRules">
+    <el-form
+      class="m-auto"
+      ref="formRef"
+      :model="authModel"
+      :rules="loginRules"
+    >
       <el-form-item prop="username">
         <el-input v-model="authModel.username" placeholder="Username" />
       </el-form-item>
 
       <el-form-item prop="password">
-        <el-input v-model="authModel.password"
-        type="password"  show-password placeholder="Username" @keyup.enter="login" />
+        <el-input
+          v-model="authModel.password"
+          type="password"
+          show-password
+          placeholder="Username"
+          @keyup.enter="login"
+        />
       </el-form-item>
 
       <el-form-item>
-       <el-button
-        type="primary"
-        class="w-full"
-        @click="login"
-        :loading="loading"
-       >
-        Sign in
-       </el-button>
+        <el-button
+          type="primary"
+          class="w-full"
+          @click="login"
+          :loading="loading"
+        >
+          Sign in
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
