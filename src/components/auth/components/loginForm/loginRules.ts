@@ -1,12 +1,23 @@
-const loginRules = {
-    username: [
-        (v: string) => !!v || "Username is required",
-    ],
-    password: [
-        (v: string) => !!v || "Password is required",
-        (v: string) => v.length >= 2 || "Password must be greater than 8 characters", // TODO: Change to 8 characters (2 for testing)
-    ],
-}
+import { FormRules } from "element-plus";
 
+const trigger = "blur";
+
+const loginRules = {
+  username: [
+    {
+      required: true,
+      message: "Username is required",
+      trigger,
+    },
+  ],
+  password: [
+    { required: true, message: "Password is required", trigger },
+    {
+      min: 2,
+      message: "Password must be greater than 8 characters",
+      trigger,
+    },
+  ],
+} as FormRules;
 
 export default loginRules;
