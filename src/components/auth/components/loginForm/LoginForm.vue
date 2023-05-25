@@ -15,11 +15,16 @@
   const router = useRouter();
 
   const login = async () => {
-    const response = await authLogin(authModel.value);
-
-    if (response) {
-      router.push("/"); // TODO - Change this to a non-hardcoded value
+    const isValidForm = await formRef.value?.validate();
+    if (!isValidForm.valid) {
+      console.log("Form is not valid");
+      return;
     }
+
+    console.log("Form is valid");
+    // login action
+    const response = await authLogin(authModel.value);
+    if (response) router.push("/"); // TODO - Change this to a non-hardcoded value
   };
 </script>
 <!-- TODO - Add rules and validation to the form -->
