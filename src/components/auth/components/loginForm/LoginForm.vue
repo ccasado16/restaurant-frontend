@@ -18,7 +18,7 @@
   const login = async () => {
     const isValidForm = await formRef.value?.validate();
 
-    if (!isValidForm.valid) {
+    if (!isValidForm) {
       console.log("Form is not valid");
       return;
     }
@@ -41,35 +41,26 @@
 
 <template>
   <div class="flex h-screen justify-center">
-    <v-card class="m-auto px-6 py-8 w-64">
-      <v-form ref="formRef" :model="authModel">
-        <v-text-field
-          class="mb-2"
-          label="Username"
-          v-model="authModel.username"
-          :rules="loginRules.username"
-        ></v-text-field>
+    <el-form class="m-auto" ref="formRef" :model="authModel" :rules="loginRules">
+      <el-form-item prop="username">
+        <el-input v-model="authModel.username" placeholder="Username" />
+      </el-form-item>
 
-        <v-text-field
-          label="Password"
-          v-model="authModel.password"
-          :rules="loginRules.password"
-          placeholder="Enter your password"
-          type="password"
-          @keydown.enter="login"
-        ></v-text-field>
+      <el-form-item prop="password">
+        <el-input v-model="authModel.password"
+        type="password"  show-password placeholder="Username" @keyup.enter="login" />
+      </el-form-item>
 
-        <v-btn
-          block
-          color="success"
-          size="large"
-          variant="elevated"
-          @click="login"
-          :loading="loading"
-        >
-          Sign In
-        </v-btn>
-      </v-form>
-    </v-card>
+      <el-form-item>
+       <el-button
+        type="primary"
+        class="w-full"
+        @click="login"
+        :loading="loading"
+       >
+        Sign in
+       </el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
