@@ -17,17 +17,25 @@
 
   const login = async () => {
     const isValidForm = await formRef.value?.validate();
+
     if (!isValidForm.valid) {
       console.log("Form is not valid");
       return;
     }
 
     console.log("Form is valid");
-    loading.value = true;
+
     // login action
-    const response = await authLogin(authModel.value);
-    if (response) router.push("/"); // TODO - Change this to a non-hardcoded value
+    loading.value = true;
+
+    if (await authLogin(authModel.value)) {
+      router.push("/"); // TODO - Change this to a non-hardcoded value
+      return;
+    }
+
     loading.value = false;
+    window.alert("Wrong credentials"); // TODO - Try to find an alternative
+    
   };
 </script>
 
