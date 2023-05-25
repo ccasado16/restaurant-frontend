@@ -4,6 +4,7 @@
   import { VForm } from "vuetify/components";
   import { useRouter } from "vue-router";
   import authLogin from "../../actions/authLogin";
+  import loginRules from "./loginRules";
 
   const authModel = ref({
     username: "",
@@ -30,11 +31,13 @@
           class="mb-2"
           label="Username"
           v-model="authModel.username"
+          :rules="loginRules.username"
         ></VTextField>
 
         <VTextField
           label="Password"
           v-model="authModel.password"
+          :rules="loginRules.password"
           placeholder="Enter your password"
           type="password"
           @keydown.enter="login"
