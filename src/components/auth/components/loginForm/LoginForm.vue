@@ -40,36 +40,33 @@
 
 <template>
   <div class="flex h-screen justify-center">
-    <el-form
-      class="m-auto"
-      ref="formRef"
-      :model="authModel"
-      :rules="loginRules"
-    >
-      <el-form-item prop="username">
-        <el-input v-model="authModel.username" placeholder="Username" />
-      </el-form-item>
+    <div class="grid w-48 items-center">
+      <el-form ref="formRef" :model="authModel" :rules="loginRules">
+        <el-form-item prop="username">
+          <el-input v-model="authModel.username" placeholder="Username" />
+        </el-form-item>
 
-      <el-form-item prop="password">
-        <el-input
-          v-model="authModel.password"
-          type="password"
-          show-password
-          placeholder="Password"
-          @keyup.enter="login"
-        />
-      </el-form-item>
+        <el-form-item prop="password">
+          <el-input
+            v-model="authModel.password"
+            type="password"
+            show-password
+            placeholder="Password"
+            @keyup.enter="login"
+          />
+        </el-form-item>
 
-      <el-form-item>
-        <el-button
-          type="primary"
-          class="w-full"
-          @click="login"
-          :loading="loading"
-        >
-          Sign in
-        </el-button>
-      </el-form-item>
-    </el-form>
+        <el-form-item>
+          <el-button
+            type="primary"
+            class="w-full"
+            @click="login"
+            :loading="loading"
+          >
+            Sign in
+          </el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
