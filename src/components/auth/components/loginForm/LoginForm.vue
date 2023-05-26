@@ -1,24 +1,24 @@
 <script lang="ts" setup>
   import { ref } from "vue";
   import { ILogin } from "../../models/IAuth";
-  import { VForm } from "vuetify/components";
   import { useRouter } from "vue-router";
   import authLogin from "../../actions/authLogin";
   import loginRules from "./loginRules";
+  import { ElForm, ElMessage } from "element-plus";
 
   const authModel = ref({
     username: "",
     password: "",
   } as ILogin);
 
-  const formRef = ref<InstanceType<typeof VForm> | null>(null);
+  const formRef = ref<InstanceType<typeof ElForm> | null>(null);
   const loading = ref<boolean>(false);
   const router = useRouter();
 
-  const login = async () => {
+  const login = async (): Promise<void> => {
     const isValidForm = await formRef.value?.validate();
 
-    if (!isValidForm.valid) {
+    if (!isValidForm) {
       console.log("Form is not valid");
       return;
     }
@@ -34,42 +34,39 @@
     }
 
     loading.value = false;
-    window.alert("Wrong credentials"); // TODO - Try to find an alternative
-    
+    ElMessage.error("Wrong credentials");
   };
 </script>
 
 <template>
   <div class="flex h-screen justify-center">
-    <v-card class="m-auto px-6 py-8 w-64">
-      <v-form ref="formRef" :model="authModel">
-        <v-text-field
-          class="mb-2"
-          label="Username"
-          v-model="authModel.username"
-          :rules="loginRules.username"
-        ></v-text-field>
+    <div class="grid w-48 items-center">
+      <el-form ref="formRef" :model="authModel" :rules="loginRules">
+        <el-form-item prop="username">
+          <el-input v-model="authModel.username" placeholder="Username" />
+        </el-form-item>
 
-        <v-text-field
-          label="Password"
-          v-model="authModel.password"
-          :rules="loginRules.password"
-          placeholder="Enter your password"
-          type="password"
-          @keydown.enter="login"
-        ></v-text-field>
+        <el-form-item prop="password">
+          <el-input
+            v-model="authModel.password"
+            type="password"
+            show-password
+            placeholder="Password"
+            @keyup.enter="login"
+          />
+        </el-form-item>
 
-        <v-btn
-          block
-          color="success"
-          size="large"
-          variant="elevated"
-          @click="login"
-          :loading="loading"
-        >
-          Sign In
-        </v-btn>
-      </v-form>
-    </v-card>
+        <el-form-item>
+          <el-button
+            type="primary"
+            class="w-full"
+            @click="login"
+            :loading="loading"
+          >
+            Sign in
+          </el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>

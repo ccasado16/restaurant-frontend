@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ILogin } from "../models/IAuth";
+import { ElMessage } from "element-plus";
 
 const authLogin = async (model: ILogin): Promise<boolean> => {
   try {
@@ -10,7 +11,10 @@ const authLogin = async (model: ILogin): Promise<boolean> => {
     // set access token to local storage
     localStorage.setItem("token", data.access);
     // prints the access and refresh tokens
-    if (data) console.log(data);
+    if (data) {
+      console.log(data);
+      ElMessage.success("Welcome user!"); // TODO - Change 'user' with the real user's name
+    }
 
     return true;
   } catch (error: any) {
